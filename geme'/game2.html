@@ -1,0 +1,160 @@
+<!doctype html>
+
+<head>
+    <title>DGD</title>
+</head>
+
+<body>
+    <canvas id="gameCanvas" width="500" height="500"></canvas>
+    <script>
+        var canvas;
+        var canvasContext;
+
+        window.onload = function () {
+            canvas = document.getElementById('gameCanvas');
+            canvasContext = canvas.getContext('2d');
+
+            document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keyup', keyReleased);
+
+            setInterval(mainloop, 1000 / 50);
+        }
+
+        //player vars
+        var pXpos = 0;
+        var pYpos = 0;
+        const pSIZE = 60;
+        var pXspeed = 5;
+        var pYspeed = 5;
+
+        //movement vars
+        const LEFT_KEY = 37;
+        const UP_KEY = 38;
+        const RIGHT_KEY = 39;
+        const DOWN_KEY = 40;
+        var leftKeyPressed = false;
+        var upKeyPressed = false;
+        var rightKeyPressed = false;
+        var downKeyPressed = false;
+
+        var startingPos = true;
+
+        var enemies = [];
+        var totalEnemies = 20;
+        var startingPos = true;
+        var monkey = new Image();
+
+        function mainloop() {
+            colorRect(0, 0, canvas.width, canvas.height, 'red'); // bg
+            colorRect(pXpos, pYpos, pSIZE, pSIZE, 'black'); // player
+
+            if (startingPos) {
+                for (i = 0; i < totalEnemies; i++) {
+                    makeEnemy();
+                }
+                startingPos = false;
+            }
+
+            playerMove();
+            drawEnemy();
+        }
+
+        function makeEnemy(){
+            var eSize = 30;
+            var eXpos = Math.floor(Math.random()*(canvas.width-eSize));
+            var eYpos = 0;
+            var eXspeed = 6;
+            var eYspeed = 6;
+
+            var e = {
+                eXpos:eXpos,
+                eYpos:eYpos,
+                eSize:eSize,
+                eXspeed:eXspeed,
+                eYspeed:eYspeed
+            }
+            enemies.push(e);
+
+            function enemyMove() {
+            enemies.forEach(function (enemy) {
+
+
+                 enemy.eYpos += enemy.eYspeed;
+
+                if (enemy.eYpos > canvas.height) {
+                    enemy.eYpos = 0 - enemy.eSIZE;
+                    enemy.eXpos = Math.floor(Math.random() * (canvas.width - enemy.eSIZE));
+                     enemy.eYspeed = Math.floor(Math.random() * (12 - 4) + 4);
+                 }
+
+                 if (enemy.eYpos + enemy.eSIZE > pYpos && enemy.eYpos < pYpos + pSIZE && enemy.eXpos + enemy
+                    .eSIZE > pXpos && enemy.eXpos < pXpos + pSIZE) {
+                     pXpos = 500;
+                     pYpos = canvas.height - pSIZE;
+                     score++;
+                     console.log('Health:' + health);
+                 }
+             });
+         }
+
+
+
+        }
+
+        function drawEnemy(){
+            enemies.forEach(function(e,i,array){
+                colorRect(e.eXpos, e.eYpos, e.eSize, e.eSize, 'white'); // enemy
+            });
+        }
+
+        function keyPressed(evt){
+            if(evt.keyCode == LEFT_KEY){
+                leftKeyPressed = true;
+            }
+            if(evt.keyCode == RIGHT_KEY){
+                rightKeyPressed = true;
+            }
+            if(evt.keyCode == UP_KEY){
+                upKeyPressed = true;
+            }
+            if(evt.keyCode == DOWN_KEY){
+                downKeyPressed = true;
+            }
+        }
+
+        function keyReleased(evt){
+            if(evt.keyCode == LEFT_KEY){
+                leftKeyPressed = false;
+            }
+            if(evt.keyCode == RIGHT_KEY){
+                rightKeyPressed = false;
+            }
+            if(evt.keyCode == UP_KEY){
+                upKeyPressed = false;
+            }
+            if(evt.keyCode == DOWN_KEY){
+                downKeyPressed = false;
+            }
+        }
+
+        function playerMove(){
+            if(leftKeyPressed){
+                pXpos -= pXspeed;
+            }
+            if(rightKeyPressed){
+                pXpos += pXspeed;
+            }
+            if(upKeyPressed){
+                pYpos -= pYspeed;
+            }
+            if(downKeyPressed){
+                pYpos += pYspeed;
+            }
+        }
+
+        function colorRect(x, y, w, h, c) {
+            canvasContext.fillStyle = c;
+            canvasContext.fillRect(x, y, w, h);
+        }
+    </script>
+</body>
