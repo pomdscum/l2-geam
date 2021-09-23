@@ -43,8 +43,7 @@
  
         //scoring vars
         var score = 0;
-        var health = 3;
- 
+
         //Background vars
         var backgroundheight = 800;
         var backgroundwidth = 1000;
@@ -109,7 +108,7 @@
                     pXpos = 500;
                     pYpos = canvas.height - pSIZE;
                     score++;
-                    console.log('Health:' + health);
+                    console.log('Score');
                 }
             });
         }
@@ -253,5 +252,10 @@
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x,y,w,h);
         }
+        function colorText(msg, x, y, f, c) {
+            canvasContext.fillStyle = c;
+            canvasContext.font = f;
+            canvasContext.fillText(msg, x, y);
+        } // end func Allows text to shown on screen
 </script>
 </body>
