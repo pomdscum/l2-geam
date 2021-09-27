@@ -65,7 +65,42 @@
         while (userName == '' || userName == null) {
             userName = prompt('what is your name?');
         } //creates a prompt when game is launched asking the player's name and will not go away until something is entered
+   
+        var difficulty = 'easy';
+        var pass = false;
+        while (pass == false) {
+            difficulty = prompt('What difficulty do you want? easy, medium or hard?', 'easy');
+            difficulty = difficulty.toLowerCase();//forces capitals to be lower case
+            if (difficulty == 'easy' || difficulty == 'medium' || difficulty == 'hard') {
+                pass = true;
+            }
  
+        }
+ 
+        if (difficulty == 'easy') {
+            min = 5;
+            max = 10;
+            // setInterval(mainloop, 1000 / 5);
+            totalEnemies = 10;
+        }
+        if (difficulty == 'medium') {
+            min = 20;
+            max= 30;
+            // setInterval(mainloop, 1000 / 15);
+            totalEnemies = 14;
+        }
+        if (difficulty == 'hard') {
+            min = 50;
+            max = 100;
+            // setInterval(mainloop, 1000 / 20);
+            totalEnemies = 16;
+        } // These ifs control the difficulty, the number of enemies will increase with the difficulty
+
+
+
+
+
+
         function drawImg(src, x, y, w, h) {
             canvasContext.drawImage(src, x, y, w, h);
         } // end func this is how images are imported
