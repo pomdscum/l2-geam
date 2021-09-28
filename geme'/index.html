@@ -41,7 +41,8 @@
         var cherry = new Image();
         cherry.src = 'img/cherry.png';
  
-        //scoring vars
+        //scoring and health vars
+        var health = 1;
         var score = 0;
 
         //Background vars
@@ -99,7 +100,11 @@
 
 
 
-
+        function EndGame(){
+            if (Health <1 ) {
+                gamerun = false;
+              }
+           }
 
         function drawImg(src, x, y, w, h) {
             canvasContext.drawImage(src, x, y, w, h);
@@ -143,7 +148,9 @@
                     pXpos = 500;
                     pYpos = canvas.height - pSIZE;
                    // score++;
-                    console.log('Score');
+                    health--;
+                    console.log('Health');
+
                 }
             });
         }
