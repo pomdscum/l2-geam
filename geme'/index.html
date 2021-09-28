@@ -100,36 +100,45 @@
 
 
 
-        function EndGame(){
-            if (Health <1 ) {
-                gamerun = false;
-              }
-           }
+        // function EndGame(){
+        //     if (Health <1 ) {
+        //         gamerun = false;
+        //       }
+        //    }
 
         function drawImg(src, x, y, w, h) {
             canvasContext.drawImage(src, x, y, w, h);
         } // end func this is how images are imported
  
+
+        var gameRun = true;
+
             function mainloop(){
-                drawImg(background, 0, 0, backgroundwidth, backgroundheight); //background
-                drawImg(sans,pXpos,pYpos,60,90); //player
- 
-                PlayerMove();
-                enemyMove();
-                drawEnemy();
-                drawFruit();
-                fruitMove();
- 
-                if(startingPos){
-                    for(i=0; i < totalEnemies; i++){
-                    makeEnemy();
+                if(gameRun){
+
+                    drawImg(background, 0, 0, backgroundwidth, backgroundheight); //background
+                    drawImg(sans,pXpos,pYpos,60,90); //player
                     
+                    PlayerMove();
+                    enemyMove();
+                    drawEnemy();
+                    drawFruit();
+                    fruitMove();
+                    
+                    if(startingPos){
+                        for(i=0; i < totalEnemies; i++){
+                            makeEnemy();
+                            
+                        }
+                        for(i=0; i < totalFruits; i++){
+                            makeFruit();
+                            
+                        }
+                        startingPos = false;
+                    }
                 }
-                for(i=0; i < totalFruits; i++){
-                    makeFruit();
- 
-                }
-                    startingPos = false;
+                else {
+                    colorRect(0,0,canvas.width,canvas.height,'red');
                 }
             }
             function enemyMove(){
@@ -148,8 +157,7 @@
                     pXpos = 500;
                     pYpos = canvas.height - pSIZE;
                    // score++;
-                    health--;
-                    console.log('Health');
+                   gameRun = false;
 
                 }
             });
