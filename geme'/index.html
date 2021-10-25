@@ -151,6 +151,7 @@
                     enemy.eYpos = 0 -enemy.eSIZE;
                     enemy.eXpos = Math.floor(Math.random()*(canvas.width - enemy.eSIZE));
                     enemy.eYspeed = Math.floor(Math.random() * (12 - 4) + 4);
+                    score++;
                 }
  
                 if(enemy.eYpos + enemy.eSIZE > pYpos && enemy.eYpos < pYpos + pSIZE && enemy.eXpos + enemy.eSIZE > pXpos && enemy.eXpos < pXpos + pSIZE){
