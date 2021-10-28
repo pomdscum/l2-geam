@@ -19,8 +19,8 @@
             } 
  
         //player vars
-        var pXpos = 0;
-        var pYpos = 0;
+        var pXpos = 400;
+        var pYpos = 715;
         const pSIZE = 60;
         var pXspeed = 5;
         var pYspeed = 5;
@@ -118,7 +118,8 @@
 
                     drawImg(background, 0, 0, backgroundwidth, backgroundheight); //background
                     drawImg(sans,pXpos,pYpos,60,90); //player
-                    
+                    colorText('score: ' + score, 50, 50, 'arial 20px', 'white');
+
                     PlayerMove();
                     enemyMove();
                     drawEnemy();
@@ -152,6 +153,7 @@
                     enemy.eXpos = Math.floor(Math.random()*(canvas.width - enemy.eSIZE));
                     enemy.eYspeed = Math.floor(Math.random() * (12 - 4) + 4);
                     score++;
+                    
                 }
  
                 if(enemy.eYpos + enemy.eSIZE > pYpos && enemy.eYpos < pYpos + pSIZE && enemy.eXpos + enemy.eSIZE > pXpos && enemy.eXpos < pXpos + pSIZE){
@@ -299,10 +301,11 @@
 
 
  
-            function colorRect(x,y,w,h,c){
+        function colorRect(x,y,w,h,c){
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x,y,w,h);
         }
+
         function colorText(msg, x, y, f, c) {
             canvasContext.fillStyle = c;
             canvasContext.font = f;
