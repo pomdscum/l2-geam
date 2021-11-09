@@ -140,7 +140,7 @@
                 }
                 else {
                     colorRect(0,0,canvas.width,canvas.height,'black');
-                    colorText('fuck you Tony', 50, 50, '30px Arial', 'white');
+                    colorText(userName + ' your score was ' + score, 50, 50, '30px Arial', 'white');
                 }
             }
             function enemyMove(){
@@ -289,6 +289,7 @@
             if (upKeyPressed) {
                 pYpos -= pYspeed;
                 if (pYpos < 0 - pSIZE) {
+                    
                     pYpos = canvas.height - pSIZE;
                 }
             }
